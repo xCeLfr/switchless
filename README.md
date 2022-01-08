@@ -1,7 +1,7 @@
 # switchless with ATtiny 45/85
 
 ## Master system
-INSTALL [INSTALL French](INSTALL_MS2_fr.md).  
+INSTALL [INSTALL French](MasterSystem/INSTALL_MS2_fr.md).  
 ATTiny 45/85 [Master System sketch](MasterSystem/switchless/switchless.ino)
 
 ## Megadrive

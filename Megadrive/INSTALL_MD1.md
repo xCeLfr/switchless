@@ -1,7 +1,7 @@
 # Installation du switchless sur MEGADRIVE 1 PAL
 
 ##### Couper/dessouder les pistes jumper JP2 et JP3 :
-![jumper JP1](install1.png)
+![jumper JP1](INSTALL1.png)
 
 ##### Couper la piste du bouton RESET:
 ![piste](install2.png)

@@ -10,4 +10,4 @@
 ![piste](INSTALL3.png)
 
 ##### Signal RESET :
-![Signal RESET](INSTALL5.png)
+![Signal RESET](INSTALL4.png)

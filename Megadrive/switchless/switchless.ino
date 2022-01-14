@@ -19,6 +19,17 @@
 //#define DEBUG
 //#define DEBUG_DISPLAY_REGION
 
+#define RESET_ACTIVE_LOW_OR_HIGH HIGH
+/*  RESET_ACTIVE_LOW_OR_HIGH LOW|HIGH
+ *  Let you choose if the MEGADRIVE is ACTIVE LOW or ACTIVE HIGH
+ *                                        
+ *  Seriel no |    Motherboard     | RESET
+ *  1600-09   |  IC BD M5 PAL VA4  | HIGH
+ *  1601-09   |  IC BD M5 PAL VA6  | LOW
+ *  
+ *  
+ */
+#define RESET_ACTIVE_LOW_OR_HIGH HIGH
 
 //byte modState = 0;  // 0 PAL - 1 NTSC
 byte modState = 0;  // 0 JAP - 1 EUR - 2 USA
@@ -66,7 +77,7 @@ void setup() {
 
 void loop() { // Main Loop  
  
-  if (digitalRead(pinButton) == LOW) {    
+  if (digitalRead(pinButton) == RESET_ACTIVE_LOW_OR_HIGH) {    
     if(!buttonPressed) { // Get first press
       buttonPressed = true; // the button is pressed
       buttonFirstPressTime = millis();

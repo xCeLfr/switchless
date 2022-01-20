@@ -10,6 +10,7 @@
    If you want to use PB5 as I/O port you have to disable reset fuse, load this sketch in the ATTiny fist !!!
    The following command will diable reset fuse ==> You will NOT be able to program the ATTiny anymore unless you use an AVR High Voltage Programmer.
    DISABLE reset fuse on ATTiny45 : 
+             cmd.exe
              cd C:\Program Files (x86)\Arduino\hardware\tools\avr\bin
              avrdude.exe -c avrisp -C ..\etc\avrdude.conf -p attiny45 -b 19200 -P com4 -U lfuse:w:0x62:m -U hfuse:w:0x5f:m -U efuse:w:0xff:m
 

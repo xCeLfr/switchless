@@ -12,7 +12,7 @@ Turn on your console and measure the voltage between the RESET button and GND:
 - If you have 5V ==> Active-HIGH
 - If you have 0V ==> Active-LOW
 
-![Reset](Reset.png)
+![Reset](Megadrive/Reset.png)
 
 2. Program your ATTiny (Edit the sketch to choose ActiveHigh or ActiveLOW)
 ATTiny 45/85 [Megadrive sketch](Megadrive/switchless/switchless.ino)

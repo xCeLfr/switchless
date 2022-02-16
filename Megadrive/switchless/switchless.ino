@@ -27,6 +27,7 @@
  *  Seriel no |    Motherboard     | RESET
  *  1600-09   |  IC BD M5 PAL VA4  | HIGH
  *  1601-09   |  IC BD M5 PAL VA6  | LOW
+ *  1601-18   |  IC BD M5 PAL      | LOW
  *  
  *  
  */

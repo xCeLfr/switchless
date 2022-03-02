@@ -9,20 +9,19 @@
   /!\ READ THIS FIRST OR YOU WILL BRICK YOUR ATTINY /!\
    If you want to use PB5 as I/O port you have to disable reset fuse, load this sketch in the ATTiny fist !!!
    The following command will diable reset fuse ==> You will NOT be able to program the ATTiny anymore unless you use an AVR High Voltage Programmer.
-   
    DISABLE reset fuse on ATTiny45 : 
-      cmd.exe
-      cd C:\Program Files (x86)\Arduino\hardware\tools\avr\bin
-      avrdude.exe -c avrisp -C ..\etc\avrdude.conf -p attiny45 -b 19200 -P com4 -U lfuse:w:0x62:m -U hfuse:w:0x5f:m -U efuse:w:0xff:m
+             cmd.exe
+             cd C:\Program Files (x86)\Arduino\hardware\tools\avr\bin
+             avrdude.exe -c avrisp -C ..\etc\avrdude.conf -p attiny45 -b 19200 -P com4 -U lfuse:w:0x62:m -U hfuse:w:0x5f:m -U efuse:w:0xff:m
+
   
 */
 #include <EEPROM.h>
 //#define DEBUG
 //#define DEBUG_DISPLAY_REGION
 
-/* OBSOLETE the reset Active state is now checked at console boot
 #define RESET_ACTIVE_LOW_OR_HIGH HIGH
- *  RESET_ACTIVE_LOW_OR_HIGH LOW|HIGH
+/*  RESET_ACTIVE_LOW_OR_HIGH LOW|HIGH
  *  Let you choose if the MEGADRIVE is ACTIVE LOW or ACTIVE HIGH
  *                                        
  *  Seriel no |    Motherboard     | RESET
@@ -32,32 +31,33 @@
  *  
  *  
  */
+#define RESET_ACTIVE_LOW_OR_HIGH HIGH
 
-byte modState = 0;  /* 0 JAP - 1 EUR - 2 USA */
+//byte modState = 0;  // 0 PAL - 1 NTSC
+byte modState = 0;  // 0 JAP - 1 EUR - 2 USA
 
 #ifdef DEBUG
-int pinLedPAL  = 6; /* LED 1 (Debug) */
-int pinLedNTSC = 7; /* LED 2 (Debug) */
+int pinLedPAL  = 6; // LED 1 (Debug)
+int pinLedNTSC = 7; // LED 2 (Debug)
 #else
-int pinLedPAL  = 0; /* LED 1 */
-int pinLedNTSC = 1; /* LED 2 */
+int pinLedPAL  = 0; // LED 1
+int pinLedNTSC = 1; // LED 2
 #endif
 
-int pinFREQ    = 2; /* JP1 */
+int pinFREQ    = 2; // JP1
 int pinButton  = 3; 
 int pinReset   = 4;
-int pinREGION  = 5; /* JP2 */
+int pinREGION  = 5; // JP2
 
 int buttonPressedLongDelay = 1200; // Press time 1200ms
 unsigned long buttonFirstPressTime = 0;
-bool buttonPressed = false;
-bool buttonPressedLong = false;
-bool resetActiveHighOrLow = LOW;
+boolean buttonPressed = false;
+boolean buttonPressedLong = false;
 
 void setup() {
-#ifdef DEBUG
+  #ifdef DEBUG
     Serial.begin(9600);
-#endif
+  #endif
 
   pinMode(pinReset  , OUTPUT);
   pinMode(pinButton , INPUT_PULLUP);
@@ -66,26 +66,22 @@ void setup() {
   pinMode(pinFREQ   , OUTPUT);
   pinMode(pinREGION , OUTPUT);
   
-  digitalWrite(pinReset, HIGH); /* reset always high */
+  digitalWrite(pinReset, HIGH); // reset always high
 
-  /* Check for saved values */
+  // Check for saved values
   modState = EEPROM.read(0); 
-  if(modState < 0 || modState > 2) modState = 0; /* EEPROM dead or first EEPROM Write not done yet */
+  //if(modState != 0 && modState != 1) modState = 0; // EEPROM dead or first EEPROM Write not done yet
+  if(modState < 0 || modState > 2) modState = 0; // EEPROM dead or first EEPROM Write not done yet
   DoSwitch(modState);
 
-  /* Set the LED */
-  modLedSet();
-
-  /* Check if the MEGADRIVE is ACTIVE LOW or ACTIVE HIGH */
-  resetActiveHighOrLow = digitalRead(pinButton);
-  
+  modLedSet(); // Set the LED   
 }
 
 void loop() { // Main Loop  
  
-  if (digitalRead(pinButton) != resetActiveHighOrLow) {    
-    if(!buttonPressed) {    /* Get first press */
-      buttonPressed = true; /* the button is pressed */
+  if (digitalRead(pinButton) == RESET_ACTIVE_LOW_OR_HIGH) {    
+    if(!buttonPressed) { // Get first press
+      buttonPressed = true; // the button is pressed
       buttonFirstPressTime = millis();
       buttonPressedLong = false;
     }
@@ -93,7 +89,7 @@ void loop() { // Main Loop
     if(buttonPressed) {
       if((millis() - buttonFirstPressTime) > buttonPressedLongDelay && buttonPressedLong == false){
         buttonPressedLong = true;
-        modSwitch(); /* SWITCH */
+        modSwitch(); // SWITCH
       }
     }  
   }
@@ -101,17 +97,17 @@ void loop() { // Main Loop
     if(buttonPressed && !buttonPressedLong) {
       buttonPressedLong = false; 
       buttonPressed = false;
-      modReset(); /* RESET */
+      modReset(); // RESET
     }
     else
       buttonPressed = false;  
   } 
 
-  /* prevent double input on button click */
+  // prevent double input on button click
   delay(10);
 }
 
-void modLedSet() {  /* Set the led 0:JAP - 1:EUR - 3:USA */
+void modLedSet() {  // Set the led 0:JAP - 1:EUR - 3:USA
 
   switch(modState) {
     case 0:
@@ -143,7 +139,7 @@ void modReset() {
     Serial.println("RESET");
   #endif
 
-  /* Quick 0v to Reset pin */
+  // Quick 0v to Reset pin
   digitalWrite(pinReset, LOW);
   delay(100);
   digitalWrite(pinReset, HIGH);  
@@ -151,34 +147,35 @@ void modReset() {
 
 void modSwitch() {
   
-  /* Toggle modState */
+  // Toggle modState 
+  //modState = !modState; // Switch mod state PAL <--> NTSC
   modState = (modState<2?modState+1:0); // Switch mod state JAP --> EUR --> NTSC --> JAP ...
 
-  /* Save value to eeprom */
-  EEPROM.write(0, modState); /* set the pin to D1 */
+  // Save value to eeprom
+  EEPROM.write(0, modState); //set the pin to D1
 
-  /* Set the mod pin */
+  // Set the mod pin
   DoSwitch(modState);
 
-  /* Change LED state */
+  // Change LED state
   modLedSet();
 }
 
 void DoSwitch(byte mode) {
     
-  /* Set the modPin and led accordingly */
+  // Set the modPin and led accordingly
   switch(mode) {
     case 0:
-      digitalWrite(pinFREQ  ,HIGH); /* 60Hz */
-      digitalWrite(pinREGION,LOW);  /* JAP  */
+      digitalWrite(pinFREQ  ,HIGH); // 60Hz
+      digitalWrite(pinREGION,LOW);  // JAP
       break; 
     case 1:
-      digitalWrite(pinFREQ  ,LOW);  /* 50Hz */
-      digitalWrite(pinREGION,HIGH); /* ENG  */
+      digitalWrite(pinFREQ  ,LOW);  // 50Hz
+      digitalWrite(pinREGION,HIGH); // ENG
       break; 
     case 2:
-      digitalWrite(pinFREQ  ,HIGH); /* 60Hz */
-      digitalWrite(pinREGION,HIGH); /* ENG  */
+      digitalWrite(pinFREQ  ,HIGH); // 60Hz
+      digitalWrite(pinREGION,HIGH); // ENG
       break; 
   }
 }

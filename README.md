@@ -24,6 +24,6 @@ ATTiny 45/85 [Megadrive sketch](Megadrive/switchless/switchless.ino)
 3. Install the Mod
 
 PAL :  
-INSTALL [INSTALL French](Megadrive/INSTALL_MD1.md).  
-- VA4 1600-09, 1601-09  
-- [VA5-VA6 1601-18 PAL G]("Megadrive/1601-18%20-%20IC%20BD%20M5%20PAL%20-%20PAL%20G")
+INSTALL [INSTALL French](Megadrive/INSTALL_MD1.md).
+- [1600-09 - IC BD M5 PAL - RGB](Megadrive/1600-09%20-%20IC%20BD%20M5%20PAL%20-%20RGB)
+- [1601-18 - IC BD M5 PAL - PAL G](Megadrive/1601-18%20-%20IC%20BD%20M5%20PAL%20-%20PAL%20G)

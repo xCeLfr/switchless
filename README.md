@@ -18,10 +18,11 @@ Turn on your console and measure the voltage between the RESET button and GND:
 
 ![Reset](Megadrive/Reset.png)
 
-2.2. Program your ATTiny (Edit the sketch and set RESET_ACTIVE_LOW_OR_HIGH HIGH or LOW)
+2.2. Program your ATTiny 45/85 ~~(Edit the sketch and set RESET_ACTIVE_LOW_OR_HIGH HIGH or LOW)~~
+
 ATTiny 45/85 [Megadrive sketch](Megadrive/switchless/switchless.ino)
 
-3. Install the Mod
+2.3. Install the Mod
 
 PAL :  
 INSTALL [INSTALL French](Megadrive/INSTALL_MD1.md).

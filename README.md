@@ -10,7 +10,7 @@ ATTiny 45/85 [Master System sketch](MasterSystem/switchless/switchless.ino)
 
 ## 2. Megadrive
 
-2.1. Check if your console **RESET** is **Active-HIGH** or **Active-LOW**
+2.1. **(Not needed anymore)** Check if your console **RESET** is **Active-HIGH** or **Active-LOW**
 
 Turn on your console and measure the voltage between the RESET button and GND:
 - If you have 5V ==> Active-HIGH

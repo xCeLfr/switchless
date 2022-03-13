@@ -1,4 +1,7 @@
-/*  ATtiny pins
+/* MASTER SYSTEM  
+ *  
+ *      
+ *      ATtiny pins
                                          ----------
                                Reset --- 1 ATtiny 8 --- VCC+ 5V
                    Reset button pin3 --- 2 45, 85 7 --- pin2 JP1

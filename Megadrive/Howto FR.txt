@@ -3,10 +3,11 @@ Toutes les informations sur l'installation ici : https://github.com/xCeLfr/switc
 Le mode choisi est sauvegardé dans la puce.
 
 Notice :
-Le changement de mode s'effectue console allumée avec un appui long( plus de 3sec) sur le bouton RESET.
+Le changement de mode s'effectue console allumée avec un appui long(plus de 3sec) sur le bouton RESET.
+Pour une meilleure compatibilité, il est conseillé d'éteindre puis rallumer la console une fois le mode désiré sélectionné.
 - Appui long sur le bouton RESET pour changer de mode.
 - Appui court pour faire RESET. 
 - Une led indique l'état :
      Bleu : 60Hz JAP => Console JAP
      Vert : 50Hz ENG => Console EUR
-Bleu pale : 60Hz ENG => Console US
+Bleu pâle : 60Hz ENG => Console US

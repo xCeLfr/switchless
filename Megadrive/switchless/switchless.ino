@@ -1,4 +1,6 @@
-/*  ATtiny pins
+ /*  Megadrive
+ *   
+ *   ATtiny pins
                                          ----------
                         (REGION) JP2 --- 1 ATtiny 8 --- VCC+ 5V
                    Reset button pin3 --- 2 45, 85 7 --- pin2 JP1 (FREQ)
@@ -73,15 +75,15 @@ void setup() {
   if(modState < 0 || modState > 2) modState = 0; /* EEPROM dead or first EEPROM Write not done yet */
   DoSwitch(modState);
 
-  /* Set the LED */
-  modLedSet();
-
   /* Check if the MEGADRIVE is ACTIVE LOW or ACTIVE HIGH */
   resetActiveHighOrLow = digitalRead(pinButton);
-  
+  startBlink(resetActiveHighOrLow);  /* blink at console power on */
+    
+  /* Set the LED */
+  modLedSet();
 }
 
-void loop() { // Main Loop  
+void loop() { /* Main Loop */
  
   if (digitalRead(pinButton) != resetActiveHighOrLow) {    
     if(!buttonPressed) {    /* Get first press */
@@ -181,4 +183,41 @@ void DoSwitch(byte mode) {
       digitalWrite(pinREGION,HIGH); /* ENG  */
       break; 
   }
+} 
+/* Function: void startBlink(byte mode)
+ * This function is will blink at console power on
+ * Active LOW  = the LED will blink 1 time
+ * Active HIGH = the LED will blink 2 times
+ */
+void startBlink(byte mode){
+
+  delay(100);
+
+  if(resetActiveHighOrLow) {    
+      /* Active LOW */
+      digitalWrite(pinLedNTSC, HIGH);
+      digitalWrite(pinLedPAL, HIGH);
+      delay(200);
+      digitalWrite(pinLedNTSC, LOW);
+      digitalWrite(pinLedPAL, LOW);
+      delay(300);
+  }
+  else {
+      /* Active HIGH */
+      digitalWrite(pinLedNTSC, HIGH);
+      digitalWrite(pinLedPAL, HIGH);
+      delay(200);
+      digitalWrite(pinLedNTSC, LOW);
+      digitalWrite(pinLedPAL, LOW);
+      delay(300);
+      digitalWrite(pinLedNTSC, HIGH);
+      digitalWrite(pinLedPAL, HIGH);
+      delay(200);
+      digitalWrite(pinLedNTSC, LOW);
+      digitalWrite(pinLedPAL, LOW);
+      delay(300);
+   }
+
+
+    delay(500);
 }

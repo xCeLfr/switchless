@@ -2,6 +2,10 @@ La console intègre un mod 50Hz ou 60Hz.
 Toutes les informations sur l'installation ici : https://github.com/xCeLfr/switchless
 Le mode choisi est sauvegardé dans la puce.
 
+Au démarrage de la console, la led clignotera en bleu pale une ou deux fois :
+ * Active LOW  = 1 clignotement
+ * Active HIGH = 2 clignotements
+
 Notice :
 Le changement de mode s'effectue console allumée avec un appui long(plus de 3sec) sur le bouton RESET.
 Pour une meilleure compatibilité, il est conseillé d'éteindre puis rallumer la console une fois le mode désiré sélectionné.
